@@ -1,0 +1,45 @@
+# Project: strtool
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = strtool_private.res
+OBJ  = strtool.o lbfileio.o strfile.o unitext.o strmaker.o $(RES)
+LINKOBJ  = strtool.o lbfileio.o strfile.o unitext.o strmaker.o $(RES)
+LIBS =  -L"D:/ProgsNT/Dev-Cpp/lib"  -march=i386 
+INCS =  -I"D:/ProgsNT/Dev-Cpp/include" 
+CXXINCS =  -I"D:/ProgsNT/Dev-Cpp/lib/gcc/mingw32/4.3.0/include"  -I"D:/ProgsNT/Dev-Cpp/include/c++/4.3.0/backward"  -I"D:/ProgsNT/Dev-Cpp/include/c++/4.3.0/mingw32"  -I"D:/ProgsNT/Dev-Cpp/include/c++/4.3.0"  -I"D:/ProgsNT/Dev-Cpp/include" 
+BIN  = strtool.exe
+CXXFLAGS = $(CXXINCS)   -march=i386
+CFLAGS = $(INCS)   -march=i386
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before strtool.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "strtool.exe" $(LIBS)
+
+strtool.o: strtool.c
+	$(CC) -c strtool.c -o strtool.o $(CFLAGS)
+
+lbfileio.o: lbfileio.c
+	$(CC) -c lbfileio.c -o lbfileio.o $(CFLAGS)
+
+strfile.o: strfile.c
+	$(CC) -c strfile.c -o strfile.o $(CFLAGS)
+
+unitext.o: unitext.c
+	$(CC) -c unitext.c -o unitext.o $(CFLAGS)
+
+strmaker.o: strmaker.c
+	$(CC) -c strmaker.c -o strmaker.o $(CFLAGS)
+
+strtool_private.res: strtool_private.rc 
+	$(WINDRES) -i strtool_private.rc --input-format=rc -o strtool_private.res -O coff 
